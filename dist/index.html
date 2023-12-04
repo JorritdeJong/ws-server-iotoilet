@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WebSocket Message Listener</title>
+</head>
+<body>
+  <h1>WebSocket Message Listener</h1>
+  <div id="messages"></div>
+
+  <script>
+    const webSocket = new WebSocket('wss://ws-iotoilet.webpubsub.azure.com/client/hubs/Hub?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ3c3M6Ly93cy1pb3RvaWxldC53ZWJwdWJzdWIuYXp1cmUuY29tL2NsaWVudC9odWJzL0h1YiIsImlhdCI6MTcwMTcwNjA4OSwiZXhwIjoxNzAxNzA5Njg5fQ.ROwzFxkov6JZUOHF2En1klrLcCcB-xYe6EKC54aK-0E');
+
+    webSocket.onopen = function(event) {
+      console.log('WebSocket connection opened');
+    };
+
+    webSocket.onmessage = function(event) {
+      const messagesContainer = document.getElementById('messages');
+      messagesContainer.innerHTML += `<p>Received message: ${event.data}</p>`;
+    };
+
+    webSocket.onclose = function(event) {
+      console.log('WebSocket connection closed');
+    };
+
+    webSocket.onerror = function(event) {
+      console.error('WebSocket error observed:', event);
+    };
+  </script>
+</body>
+</html>
